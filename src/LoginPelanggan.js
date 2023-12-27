@@ -46,8 +46,8 @@ const LoginPelanggan = () => {
         return result;
     };
 
-    const redirectToAdminLogin = () => {
-        navigate('/admin');
+    const navigateToLogin = () => {
+        navigate('/admin'); // Fungsi untuk berpindah ke halaman Login.js
     };
 
     return (
@@ -56,7 +56,7 @@ const LoginPelanggan = () => {
                 <form onSubmit={proceedLogin} className="container">
                     <div className="card">
                         <div className="card-header">
-                            <h2>User Login</h2>
+                            <h2>pelanggan Login</h2>
                         </div>
                         <div className="card-body">
                             <div className="form-group">
@@ -71,7 +71,7 @@ const LoginPelanggan = () => {
                         <div className="card-footer">
                             <button type="submit" className="btn btn-primary">Login</button> |
                             <Link className="btn btn-success" to={'/register'}>New User</Link>
-                            <button onClick={redirectToAdminLogin} className="btn btn-warning ml-2">Masuk sebagai admin</button>
+                            <button onClick={navigateToLogin} className="btn btn-info ml-2">Login Admin</button>
                         </div>
                     </div>
                 </form>
