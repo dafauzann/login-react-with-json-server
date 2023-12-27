@@ -31,7 +31,7 @@ const Customer = () => {
 
     const GetUserAccess = () => {
         const userrole = sessionStorage.getItem('userrole') != null ? sessionStorage.getItem('userrole').toString() : '';
-        fetch("http://localhost:8000/roleaccess?role=" + userrole + "&menu=doctors").then(res => {
+        fetch("http://localhost:3000/roleaccess?role=" + userrole + "&menu=doctors").then(res => {
             if (!res.ok) {
                 navigate('/');
             toast.warning('You are not authorized to access');

@@ -12,6 +12,11 @@ const LoginPelanggan = () => {
         sessionStorage.clear();
     }, []);
 
+    const redirectToAdmin = () => {
+       //redirect to admin login
+       navigate('/admin');
+    }
+
     
 
     const proceedLogin = (e) => {
@@ -34,9 +39,11 @@ const LoginPelanggan = () => {
                         sessionStorage.setItem('username', username);
                         sessionStorage.setItem('userrole', item.role);
                         navigate('/');
+                        return true;
                     } else {
                         console.log('Login Failed');
                         toast.error('Please Enter valid credentials');
+                        return false;
                     }
                 });
                 console.log(user);
@@ -49,9 +56,7 @@ const LoginPelanggan = () => {
         }
     };
 
-    const redirectToAdmin = () => {
-        navigate('/admin');
-    }
+
 
 
     const validate = () => {
@@ -89,10 +94,10 @@ const LoginPelanggan = () => {
                         <div className="card-footer">
                             <button type="submit" className="btn btn-primary">Login</button> |
                             <Link className="btn btn-success" to={'/register'}>New User</Link>
+                            <button type="button" className="btn btn-warning ml-2" onClick={() => redirectToAdmin()}>Masuk sebagai admin</button>
                         </div>
                     </div>
                 </form>
-                            <button type="button" className="btn btn-warning ml-2" onClick={() => redirectToAdmin()}>Masuk sebagai admin</button>
             </div>
         </div>
     );

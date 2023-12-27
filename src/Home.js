@@ -1,27 +1,45 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Home = () => {
     const usenavigate = useNavigate();
     const [customerlist, listupdate] = useState(null);
+    const [displayusername, displayusernameupdate] = useState('');
+    const [showmenu, showmenuupdateupdate] = useState(false);
+    const location = useLocation();
    
-    useEffect(() => {
+    // useEffect(() => {
        
 
-        // let jwttoken = sessionStorage.getItem('jwttoken');
-        // fetch("https://localhost:44308/Customer", {
-        //     headers: {
-        //         'Authorization': 'bearer ' + jwttoken
-        //     }
-        // }).then((res) => {
-        //     return res.json();
-        // }).then((resp) => {
-        //     listupdate(resp);
-        // }).catch((err) => {
-        //     console.log(err.messsage)
-        // });
+    //     // let jwttoken = sessionStorage.getItem('jwttoken');
+    //     // fetch("https://localhost:44308/Customer", {
+    //     //     headers: {
+    //     //         'Authorization': 'bearer ' + jwttoken
+    //     //     }
+    //     // }).then((res) => {
+    //     //     return res.json();
+    //     // }).then((resp) => {
+    //     //     listupdate(resp);
+    //     // }).catch((err) => {
+    //     //     console.log(err.messsage)
+    //     // });
 
-    }, []);
+    // }, []);
+
+        useEffect(() => {
+        if (location.pathname === '/') {
+            showmenuupdateupdate(false);
+        } else {
+            showmenuupdateupdate(true);
+            let username = sessionStorage.getItem('username');
+            if (username === '' || username === null) {
+                usenavigate('/login');
+            } else {
+                displayusernameupdate(username);
+            }
+        }
+
+    }, [location])
 
     return (
         <div>

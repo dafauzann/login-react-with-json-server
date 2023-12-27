@@ -87,12 +87,14 @@
       "id": 1,
       "username": "pelanggan1",
       "password": "password1",
+      "role": "user",
       "alamat": "Alamat 1"
     },
     {
       "id": 2,
       "username": "pelanggan2",
       "password": "password2",
+      "role": "user",
       "alamat": "Alamat 2"
     }
   ]

@@ -47,6 +47,7 @@ function App() {
       <BrowserRouter>
         <Appheader></Appheader>
         <Routes>
+          
           <Route path='/login' element={<LoginPelanggan />}></Route> {/* Gunakan LoginCustomers.js sebagai halaman utama */}
           <Route path='/admin' element={<Login />}></Route> {/* Jika ingin masuk ke halaman admin */}
           <Route path='/register' element={<Register />}></Route>
