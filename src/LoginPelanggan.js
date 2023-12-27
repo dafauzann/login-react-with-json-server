@@ -12,26 +12,47 @@ const LoginPelanggan = () => {
         sessionStorage.clear();
     }, []);
 
+    
+
     const proceedLogin = (e) => {
         e.preventDefault();
+        //ambil value username dan password lalu jadikan objek
+        const inputObj = {
+            "username": username,
+            "password": password
+        };
+        console.log(inputObj);
+        //validasi inputObj apakah sama dengan username dan password yang ada di database
         if (validate()) {
-            fetch("http://localhost:8000/pelanggan/")
-                .then((res) => res.json())
-                .then((data) => {
-                    const foundUser = data.pelanggan.find((user) => user.username === username && user.password === password);
-                    if (foundUser) {
+            fetch("http://localhost:3000/pelanggan/").then((res) => {
+                return res.json();
+            }).then((resp) => {
+                console.log(resp);
+                const user = resp.find((item) => {
+                    if (item.username === inputObj.username && item.password === inputObj.password) {
                         toast.success('Success');
                         sessionStorage.setItem('username', username);
+                        sessionStorage.setItem('userrole', item.role);
                         navigate('/');
                     } else {
-                        toast.error('Invalid credentials');
+                        console.log('Login Failed');
+                        toast.error('Please Enter valid credentials');
                     }
-                })
-                .catch((err) => {
-                    toast.error('Error logging in: ' + err.message);
                 });
+                console.log(user);
+                
+                
+            }).catch((err) => {
+                toast.error('Login Failed due to :' + err.message);
+                // toast.error('Please Enter valid credentials');
+            });
         }
     };
+
+    const redirectToAdmin = () => {
+        navigate('/admin');
+    }
+
 
     const validate = () => {
         let result = true;
@@ -46,9 +67,6 @@ const LoginPelanggan = () => {
         return result;
     };
 
-    const redirectToAdminLogin = () => {
-        navigate('/admin');
-    };
 
     return (
         <div className="row">
@@ -71,10 +89,10 @@ const LoginPelanggan = () => {
                         <div className="card-footer">
                             <button type="submit" className="btn btn-primary">Login</button> |
                             <Link className="btn btn-success" to={'/register'}>New User</Link>
-                            <button onClick={redirectToAdminLogin} className="btn btn-warning ml-2">Masuk sebagai admin</button>
                         </div>
                     </div>
                 </form>
+                            <button type="button" className="btn btn-warning ml-2" onClick={() => redirectToAdmin()}>Masuk sebagai admin</button>
             </div>
         </div>
     );
