@@ -51,6 +51,7 @@ function App() {
           <Route path='/admin' element={<Login />}></Route> {/* Jika ingin masuk ke halaman admin */}
           <Route path='/register' element={<Register />}></Route>
           <Route path='/customer' element={<Customer />}></Route>
+          
         </Routes>
       </BrowserRouter>
     </div>
