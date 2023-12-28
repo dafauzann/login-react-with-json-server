@@ -1,19 +1,21 @@
 {
   "user": [
     {
-      "id": "adminuser",
+      "id": 1,
       "name": "Nihira",
+      "username" : "adminuser",
       "password": "admin",
       "email": "nihiratechiees@gmail.com",
       "phone": "8989898989",
       "country": "usa",
-      "address": "",
+      "address": "blablabla",
       "role":"admin",
       "gender": "female"
     },
     {
-      "id": "ntuser",
+      "id": 2,
       "name": "Fullname",
+      "username" : "ntuser",
       "password": "ntuser",
       "email": "email@email.com",
       "phone": "56778889989",

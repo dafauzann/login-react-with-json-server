@@ -6,78 +6,70 @@ const Login = () => {
     const [username, usernameupdate] = useState('');
     const [password, passwordupdate] = useState('');
 
-    const usenavigate=useNavigate();
+    const navigate = useNavigate();
 
-    useEffect(()=>{
-sessionStorage.clear();
-    },[]);
+//     useEffect(()=>{
+// sessionStorage.clear();
+//     },[]);
 
     const ProceedLogin = (e) => {
         e.preventDefault();
         if (validate()) {
-            ///implentation
-            // console.log('proceed');
-            fetch("http://localhost:8000/user/" + username).then((res) => {
+            const inputObj = { "username": username, "password": password };
+            fetch("http://localhost:8000/user/").then((res) => {
                 return res.json();
             }).then((resp) => {
-                //console.log(resp)
-                if (Object.keys(resp).length === 0) {
-                    toast.error('Please Enter valid username');
-                } else {
-                    if (resp.password === password) {
+                const user = resp.find((item) => {
+                    if (item.username === inputObj.username && item.password === inputObj.password) {
                         toast.success('Success');
-                        sessionStorage.setItem('username',username);
-                        sessionStorage.setItem('userrole',resp.role);
-                        usenavigate('/')
-                    }else{
+                        sessionStorage.setItem('username', username);
+                        sessionStorage.setItem('userrole', item.role);
+                        navigate('/');
+                    } else {
+                        console.log('Login Failed');
                         toast.error('Please Enter valid credentials');
                     }
-                }
+                });
+                console.log(user);
             }).catch((err) => {
                 toast.error('Login Failed due to :' + err.message);
             });
         }
     }
 
-    const ProceedLoginusingAPI = (e) => {
-        e.preventDefault();
-        if (validate()) {
-            ///implentation
-            // console.log('proceed');
-            let inputobj={"username": username,
-            "password": password};
-            fetch("https://localhost:44308/User/Authenticate",{
-                method:'POST',
-                headers:{'content-type':'application/json'},
-                body:JSON.stringify(inputobj)
-            }).then((res) => {
-                return res.json();
-            }).then((resp) => {
-                console.log(resp)
-                if (Object.keys(resp).length === 0) {
-                    toast.error('Login failed, invalid credentials');
-                }else{
-                     toast.success('Success');
-                     sessionStorage.setItem('username',username);
-                     sessionStorage.setItem('jwttoken',resp.jwtToken);
-                   usenavigate('/')
-                }
-                // if (Object.keys(resp).length === 0) {
-                //     toast.error('Please Enter valid username');
-                // } else {
-                //     if (resp.password === password) {
-                //         toast.success('Success');
-                //         sessionStorage.setItem('username',username);
-                //         usenavigate('/')
-                //     }else{
-                //         toast.error('Please Enter valid credentials');
-                //     }
-                // }
-            }).catch((err) => {
-                toast.error('Login Failed due to :' + err.message);
-            });
-        }
-    }
+    // const ProceedLoginusingAPI = (e) => {
+    //     e.preventDefault();
+    //     if (validate()) {
+    //         let inputobj = { "username": username, "password": password };
+    //         fetch("https://localhost:3000/user/"+username,{
+    //             method:'POST',
+    //             headers:{
+    //                 'Content-Type':'application/json'
+    //             },
+    //             body:JSON.stringify(inputobj)
+    //         }).then((res) => {
+    //             return res.json();
+    //         }).then((resp) => {
+    //             //cari username dan password yang sama dengan inputObj, jika ada tampilkan toast success jika tidak tampilkan toast error
+    //             // console.log(resp);
+    //             if (Object.keys(resp).length === 0) {
+    //                 toast.error('Please Enter valid username');
+    //             } else {
+    //                 if (resp.password === password) {
+    //                     toast.success('Success');
+    //                     sessionStorage.setItem('username',username);
+    //                     navigate('/')
+    //                 }else{
+    //                     toast.error('Please Enter valid credentials');
+    //                 }
+    //             }
+    //         }).catch((err) => {
+    //             toast.error('Login Failed due to :' + err.message);
+    //         });
+
+
+    //     }
+    // }
     const validate = () => {
         let result = true;
         if (username === '' || username === null) {

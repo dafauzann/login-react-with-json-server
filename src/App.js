@@ -63,9 +63,10 @@
 
 
 // App.js
-import React from 'react';
+import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import LoginPelanggan from './LoginPelanggan'; // Import LoginPelanggan.js
+// import Home from './Home';
+import LoginPelanggan from './LoginPelanggan'; // Import LoginCustomers.js
 import Login from './Login';
 import Register from './Register';
 import { ToastContainer } from 'react-toastify';
@@ -79,11 +80,12 @@ function App() {
       <BrowserRouter>
         <Appheader></Appheader>
         <Routes>
-          <Route path='/' element={<LoginPelanggan />}></Route> {/* Halaman utama LoginPelanggan.js */}
-          <Route path='/login' element={<LoginPelanggan />}></Route>
-          <Route path='/admin' element={<Login />}></Route>
+          
+          <Route path='/login' element={<LoginPelanggan />}></Route> {/* Gunakan LoginCustomers.js sebagai halaman utama */}
+          <Route path='/admin' element={<Login />}></Route> {/* Jika ingin masuk ke halaman admin */}
           <Route path='/register' element={<Register />}></Route>
           <Route path='/customer' element={<Customer />}></Route>
+          
         </Routes>
       </BrowserRouter>
     </div>
